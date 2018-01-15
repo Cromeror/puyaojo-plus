@@ -1,0 +1,17 @@
+node_modules
+npm-debug.log
+.tmp
+.idea
+public
+compiled
+.swp
+.vscode
+config/localConfig.js
+app/localConfig.js
+server/localConfig.js
+ecosystem.json
+jts_widget/*
+Thumbs.db
+app/pagesRoutes.js
+redirect.list
+package-lock.json

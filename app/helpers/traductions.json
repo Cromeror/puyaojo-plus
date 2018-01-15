@@ -1,0 +1,553 @@
+{
+    "slugs": {
+        "sights": {
+            "en": "sights-attractions",
+            "es": "lugares-de-interes"
+        },
+        "events": {
+            "en": "events",
+            "es": "eventos"
+        },
+        "tours": {
+            "en": "tours-activities",
+            "es": "tours-actividades"
+        },
+        "all": {
+            "en": "yachts-boats-rentals",
+            "es": "alquiler-yates-botes"
+        },
+        "yachts": {
+            "en": "yachts",
+            "es": "yates"
+        },
+        "sailboats": {
+            "en": "sailboats",
+            "es": "veleros"
+        },
+        "speedboats": {
+            "en": "speedboats",
+            "es": "lanchas-rapidas"
+        },
+        "restaurants": {
+            "en": "restaurants",
+            "es": "restaurantes"
+        },
+        "coffee": {
+            "en": "coffee-ice-cream",
+            "es": "cafe-helado"
+        },
+        "restaurantBar": {
+            "en": "restaurant-bar",
+            "es": "restaurantes-bar"
+        },
+        "pubs": {
+            "en": "bars-pubs",
+            "es": "bares-pubs"
+        },
+        "clubs": {
+            "en": "night-clubs",
+            "es": "discotecas"
+        },
+        "hotels": {
+            "en": "hotels-and-accommodation",
+            "es": "hoteles-y-acomodacion"
+        },
+        "rentals": {
+            "en": "vacation-home-rentals",
+            "es": "casas-vacacionales"
+        },
+        "islands": {
+            "en": "cottage-and-private-islands",
+            "es": "cabanas-e-islas-privadas"
+        },
+        "food": {
+            "en": "food-drink",
+            "es": "comida-bebidas"
+        },
+        "nightlife": {
+            "en": "nightlife",
+            "es": "vida-nocturna"
+        },
+        "blog": {
+            "en": "travel-articles",
+            "es": "blog-experiencias"
+        },
+        "shopping": {
+            "en": "shopping",
+            "es": "comercio-compras"
+        },
+        "post": {
+            "en": "articles",
+            "es": "articulos"
+        },
+        "event": {
+            "en": "events",
+            "es": "eventos"
+        },
+        "article": {
+            "en": "articles",
+            "es": "articulos"
+        }
+    },
+    "containers": {
+        "Page404": {
+            "title": {
+                "en": "Not Found",
+                "es": "No encontrado"
+            },
+            "description": {
+                "en": "Sorry, but the page you are trying to view does not exist.",
+                "es": "Lo sentimos, pero la página que esta intentando ver no existe."
+            }
+        },
+        "Footer": {
+            "links": {
+                "en": "Links",
+                "es": "Enlaces"
+            },
+            "contactUs": {
+                "en": "Contact Us",
+                "es": "Contáctanos"
+            },
+            "terms": {
+                "en": "Terms of Use",
+                "es": "Términos de uso"
+            },
+            "privacy": {
+                "en": "Privacy Policy",
+                "es": "Politica de privacidad"
+            }
+        }
+    },
+    "common": {
+        "ad": {
+            "en": "Advertising",
+            "es": "Publicidad"
+        },
+        "thankyou": {
+            "en": "Thank you",
+            "es": "Gracias"
+        },
+        "loading": {
+            "en": "Loading...",
+            "es": "Cargando..."
+        },
+        "close": {
+            "en": "Close",
+            "es": "Cerrar"
+        },
+        "cancel": {
+            "en": "Cancel",
+            "es": "Cancelar"
+        },
+        "notFound": {
+            "en": "Page not found",
+            "es": "Página no encontrada"
+        },
+        "perNight": {
+            "en": "per night",
+            "es": "por noche"
+        },
+        "prev": {
+            "en": "Prev",
+            "es": "Anterior"
+        },
+        "next": {
+            "en": "Next",
+            "es": "Siguiente"
+        },
+        "dashboard": {
+            "en": "dashboard",
+            "es": "Escritorio"
+        },
+        "availability": {
+            "en": "Availability",
+            "es": "Disponibilidad"
+        },
+        "from": {
+            "en": "from",
+            "es": "desde"
+        },
+        "to": {
+            "en": " to ",
+            "es": " a "
+        },
+        "rooms": {
+            "en": "Rooms",
+            "es": "Habitaciones"
+        },
+        "edit": {
+            "en": "Edit",
+            "es": "Editar"
+        },
+        "description": {
+            "en": "Description",
+            "es": "Descripción"
+        },
+        "of": {
+            "en": " of ",
+            "es": " de "
+        },
+        "day": {
+            "en": "Day ",
+            "es": "Día "
+        },
+        "noResults": {
+            "en": "Sorry, no results were found.",
+            "es": "Lo sentimos, no se encontraron resultados."
+        },
+        "person": {
+            "en": " people",
+            "es": " personas"
+        },
+        "price": {
+            "en": "Price: ",
+            "es": "Precio: "
+        },
+        "type": {
+            "en": "Type: ",
+            "es": "Tipo: "
+        },
+        "checkIn": {
+            "en": "Check-in:",
+            "es": "Fecha de llegada:"
+        },
+        "checkOut": {
+            "en": "Check-out:",
+            "es": "Fecha de salida:"
+        },
+        "bookingDate": {
+            "en": "Reservation date:",
+            "es": "Fecha de reserva:"
+        },
+        "yes": {
+            "en": "Yes",
+            "es": "Si"
+        },
+        "no": {
+            "en": "No",
+            "es": "No"
+        }
+    },
+    "forms": {
+        "name": {
+            "en": "First name",
+            "es": "Nombre"
+        },
+        "fullName": {
+            "en": "Full name",
+            "es": "Nombre y apellido"
+        },
+        "email": {
+            "en": "Email",
+            "es": "Correo electrónico"
+        },
+        "confirmEmail": {
+            "en": "Confirm your Email",
+            "es": "Confirme su correo electrónico"
+        },
+        "matchEmails": {
+            "en": "Do not match emails",
+            "es": "No coincide los correos electrónicos"
+        },
+        "observation": {
+            "en": "Your message",
+            "es": "Tu mensaje"
+        },
+        "submit": {
+            "en": "Submit",
+            "es": "Enviar"
+        },
+        "lastname": {
+            "en": "Last name",
+            "es": "Apellido"
+        },
+        "city": {
+            "en": "City",
+            "es": "Ciudad"
+        },
+        "phone": {
+            "en": "Phone",
+            "es": "Teléfono"
+        },
+        "startDate": {
+            "en": "Start date",
+            "es": "Fecha de inicio"
+        },
+        "endDate": {
+            "en": "End date",
+            "es": "Fecha final"
+        },
+        "username": {
+            "en": "User name",
+            "es": "Nombre de usuario"
+        },
+        "password": {
+            "en": "Password",
+            "es": "Contraseña"
+        },
+        "businessName": {
+            "en": "Business name",
+            "es": "Nombre del negocio"
+        },
+        "date": {
+            "en": "Date",
+            "es": "Fecha"
+        },
+        "initHour": {
+            "en": "Starting time",
+            "es": "Hora de inicio"
+        },
+        "endHour": {
+            "en": "Ending time",
+            "es": "Hora final"
+        },
+        "country": {
+            "en": "Country",
+            "es": "País"
+        },
+        "description": {
+            "en": "Description",
+            "es": "Descripción"
+        },
+        "address": {
+            "en": "Address",
+            "es": "Dirección"
+        },
+        "comment": {
+            "en": "Your comment",
+            "es": "Tu comentario"
+        },
+        "comments": {
+            "en": "Comments",
+            "es": "Comentarios"
+        },
+        "selectCountry": {
+            "en": "Select country",
+            "es": "Seleccione el país"
+        },
+        "robotConfirm": {
+            "en": "Confirm that you are not a robot",
+            "es": "Confirma que no eres un robot"
+        },
+        "requestSend": {
+            "en": "Request send",
+            "es": "Petición enviada"
+        },
+        "message": {
+            "en": "Message",
+            "es": "Mensaje"
+        },
+        "user": {
+            "en": "User",
+            "es": "Usuario"
+        },
+        "documentType": {
+            "en": "Document type",
+            "es": "Tipo de Documento"
+        },
+        "passport": {
+            "en": "Passport",
+            "es": "Pasaporte"
+        },
+        "dni": {
+            "en": "DNI",
+            "es": "DNI"
+        },
+        "documentCountry": {
+            "en": "Document country",
+            "es": "País del documento"
+        },
+        "number": {
+            "en": "Number",
+            "es": "Número"
+        },
+        "phoneType": {
+            "en": "Phone type",
+            "es": "Tipo de telefono"
+        },
+        "cellPhone": {
+            "en": "Cell phone",
+            "es": "Celular"
+        },
+        "countryCode": {
+            "en": "Country code",
+            "es": "Código de país"
+        },
+        "area": {
+            "en": "Area",
+            "es": "Area"
+        },
+        "landline": {
+            "en": "Phone",
+            "es": "Teléfono fijo"
+        }
+    },
+    "foodTypes": {
+        "international": {
+            "en": "International",
+            "es": "Internacional"
+        },
+        "italian": {
+            "en": "Italian",
+            "es": "Italiano"
+        },
+        "mexican": {
+            "en": "Mexican",
+            "es": "Mexicano"
+        },
+        "sudamerican": {
+            "en": "Sudamerican",
+            "es": "Sudamericano"
+        },
+        "steak": {
+            "en": "Barbecued Steak",
+            "es": "Filete asado"
+        },
+        "french": {
+            "en": "French",
+            "es": "Francés"
+        },
+        "spanish": {
+            "en": "Spanish",
+            "es": "Español"
+        },
+        "mediterranean": {
+            "en": "Mediterranean",
+            "es": "Mediterráneo"
+        },
+        "fish-seafood": {
+            "en": "Fish & Seafood",
+            "es": "Pescado y mariscos"
+        },
+        "chinese": {
+            "en": "Chinese",
+            "es": "Chino"
+        },
+        "asian": {
+            "en": "Asian",
+            "es": "Asiático"
+        },
+        "sushi": {
+            "en": "Sushi",
+            "es": "Sushi"
+        },
+        "pizzas": {
+            "en": "Pizzas",
+            "es": "Pizzas"
+        },
+        "vegetarian": {
+            "en": "Vegetarian",
+            "es": "Vegetariano"
+        },
+        "indonesian": {
+            "en": "Indonesian",
+            "es": "Indonesio"
+        },
+        "arabe": {
+            "en": "Arabe",
+            "es": "Arabe"
+        },
+        "american": {
+            "en": "American Fast Food",
+            "es": "Comida rápida americana"
+        },
+        "author-specialties": {
+            "en": "Author Specialties",
+            "es": "Especialidades de autor"
+        },
+        "lebanese": {
+            "en": "Lebanese",
+            "es": "Libanesa"
+        },
+        "caribbean": {
+            "en": "Caribbean",
+            "es": "Caribeña"
+        },
+        "latina": {
+            "en": "Latina",
+            "es": "Latina"
+        },
+        "peruana": {
+            "en": "Peruvian",
+            "es": "Peruana"
+        }
+    },
+    "components": {},
+    "sources": {
+        "bookRequest": {
+            "en": "Donde.co Booking Request ENG",
+            "es": "Donde.co Booking Request ESP"
+        },
+        "contactRequest": {
+            "en": "Donde.co Contact ENG",
+            "es": "Donde.co Contact ESP"
+        }
+    },
+    "templates": {
+        "booking": {
+            "providerBody": {
+                "en": "Guest pre-order information",
+                "es": "Información de la pre-orden del huésped"
+            },
+            "clientBody": {
+                "PayPal": {
+                    "en": "Thank you for trusting us. Find below the details of your pre-order. We will send you a purchase confirmation as soon as the payment is processed.",
+                    "es": "Gracias por confiar en nosotros. A continuación encontrará los detalles de su pre-orden. Le enviaremos una confirmación tan pronto como se procese el pago."
+                },
+                "Bank": {
+                    "en": "Thank you for trusting us. Find below the details of your pre-order. and our bank account information to make the wire transfer. We will send you a purchase confirmation as soon as the payment is processed.<br><br> Chase Manhattan Bank<br> Chase Premier Checking # 111379167<br> Jetsemani LLC (2017)<br> ABA: 021000021<br> EIN: 81-5141510",
+                    "es": "Gracias por confiar en nosotros. A continuación encontrará los detalles de su pre-orden y nuestra información de cuenta bancaria para hacer la transferencia. Le enviaremos una confirmación tan pronto como se procese el pago.<br><br> Chase Manhattan Bank<br> Chase Premier Checking # 111379167<br> Jetsemani LLC (2017)<br> ABA: 021000021<br> EIN: 81-5141510"
+                }
+            },
+            "paymentType": {
+                "en": "Payment Type",
+                "es": "Tipo de pago"
+            },
+            "priceFor": {
+                "en": "Price for",
+                "es": "Precio por"
+            },
+            "guestInformation": {
+                "en": "Guest(s) information",
+                "es": "Información de huésped(es)"
+            },
+            "guests": {
+                "en": "Guest(s)",
+                "es": "Huésped(es)"
+            },
+            "contactInformation": {
+                "en": "Contact information",
+                "es": "Información del contacto"
+            },
+            "yourOrder": {
+                "en": "Your order",
+                "es": "Su orden"
+            },
+            "guest": {
+                "en": "Guest",
+                "es": "Huésped"
+            },
+            "phoneTypes": {
+                "Cel phone": {
+                    "en": "Cel phone",
+                    "es": "Celular"
+                },
+                "Phone": {
+                    "en": "Phone",
+                    "es": "Teléfono"
+                }
+            }
+        },
+        "contactUs": {
+            "thankYou": {
+                "en": "Thank you for contacting us, we will respond as soon as possible.",
+                "es": "Gracias por contactarnos, le responderemos lo antes posible."
+            },
+            "contactRequest": {
+                "en": "Contact request",
+                "es": "Solicitud de contacto"
+            }
+        }
+    }
+}

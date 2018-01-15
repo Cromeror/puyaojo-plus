@@ -1,0 +1,2 @@
+rewrite /cartagena/hotels$ https://jetsemani.com/cartagena/hotels-and-accommodation permanent;
+rewrite /cartagena/vacation-home-rentals/houses/27070-casa-del-hobo-3 https://jetsemani.com/cartagena/vacation-home-rentals/houses/27070-casa-del-hobo permanent;

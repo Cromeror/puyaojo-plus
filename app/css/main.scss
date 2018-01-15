@@ -1,0 +1,27 @@
+@import '../../node_modules/antd/dist/antd.css';
+@import './login.scss';
+@import './datepicker-range.scss';
+
+.logo {
+  height: 31px;
+  margin: 16px 24px 16px 0;
+  float: left;
+};
+
+.preview-box{
+  margin-top: 16px;
+  border: 1px dashed #e9e9e9;
+  border-radius: 6px;
+  background-color: #fafafa;
+  min-height: 200px;
+  text-align: center;
+  padding-top: 80px;
+};
+
+.width-parent{
+  width: 100%;
+}
+
+.center-auto{
+  margin: auto;
+}

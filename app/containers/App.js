@@ -1,0 +1,133 @@
+import React, { PropTypes, Children } from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { Link } from 'react-router'
+import axios from 'axios'
+import { isProduction } from '../../config/app';
+
+/* Config */
+import { serverConfig, emails } from '../../config/localConfig'
+import { ENV } from '../../config/env'
+/* Page meta */
+import Page from 'pages/Page'
+import { title as metaTitle, meta, link } from 'pages/assets'
+/* Components */
+import { Layout, Menu, Breadcrumb, Button } from 'antd';
+/* Actions */
+import { logout, getUserInfo } from '../actions/user'
+import { getAllData } from 'actions/example'
+import { initUIVars } from 'actions/ui'
+/* Helpers */
+import { getToken } from 'helpers/helpers'
+/**Images */
+import jts_logo from 'images/logo-white.png'
+
+/* Styles */
+if (isProduction || __DEVCLIENT__) {
+    require('css/main.scss')
+}
+
+const { Header, Content, Footer } = Layout;
+/* Modal instance */
+const Modal = React.createClass({
+    onClose() {
+        var select = document.querySelector('html')
+        select.style.overflow = 'auto'
+    },
+    render() {
+        const { children, returnTo } = this.props
+        return (
+            <div className="modal">
+                <Link className="modalOuter"></Link>
+                <div className="modalContent hero">
+                    <Link to={returnTo} onClick={this.onClose}><i style={{ color: 'gray' }} className={cx("material-icons", "modalClose")}>close</i></Link>
+                    {children}
+                </div>
+            </div>
+        )
+    }
+})
+
+class App extends React.Component {
+    constructor(props) {
+        super(props)
+    }
+
+    componentWillMount() {
+        const { actions } = this.props
+        let token = getToken()
+        /* Se obtiene el width y height del navegador */
+        if (typeof window === 'object') {
+            actions.initUIVars(window.innerWidth, window.innerHeight, window.innerWidth < 460)
+        }
+        /* Si existe un token se carga y se inicia session */
+        if (token) {
+            actions.getUserInfo(token)
+        }
+    }
+
+    render() {
+        const { data, modal, location, children, user } = this.props
+
+        let isModal = (
+            location.state &&
+            location.state.modal &&
+            this.previousChildren
+        )
+        return (
+            <Page title={metaTitle} meta={meta} link={link}>
+                <Layout>
+                    <Header>
+                        <Link to="/" className="logo">
+                            <div style={{ margin: 'auto' }}>
+                                <label >Powered by</label>
+                                <img className={"noPadding"} src={jts_logo} height="34px" />
+                            </div>
+                        </Link>
+                        {user.authenticated && this.loadUserNavBar(user.data)}
+                    </Header>
+                    {children}
+                    <Footer>
+                        <div >
+                            <label >Powered by</label>
+                            <Link to="/">
+                                <img className={"noPadding"} src={jts_logo} height="34px" />
+                            </Link>
+                        </div>
+                    </Footer>
+                </Layout>
+            </Page>
+        )
+    }
+
+    loadUserNavBar = (user) => {
+        return (
+            <div style={{ float: 'right' }}>
+                <Button
+                    onClick={e => { this.props.actions.logout() }} >
+                    Log out
+                </Button>
+            </div>
+        )
+    }
+}
+
+function mapStateToProps(state) {
+    return {
+        data: state.data,
+        modal: state.ui.modal,
+        user: state.user
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators({ getAllData, initUIVars, getUserInfo, logout }, dispatch)
+    }
+}
+
+App.propTypes = {
+    children: PropTypes.object
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)

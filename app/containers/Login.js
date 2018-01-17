@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import serialize from 'form-serialize'
 
 /**Components */
 import {
@@ -95,6 +94,8 @@ class Login extends React.Component {
             { isLogin } = this.state,
             { actions, form } = this.props,
             formFields = form.getFieldsValue()
+        //Importante definir la strategia
+        formFields.strategy = "local"
         if (isLogin) {
             actions.login(formFields)
         } else {

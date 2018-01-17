@@ -45,8 +45,8 @@ export default store => {
             }} />,
            <Route
                 key="dashboard"
-                path="dashboard"
-                onEnter={requireAuth}
+                path="dashboard"/* 
+                onEnter={requireAuth} */
                 getComponent={(location, cb) => {
                     require.ensure([], require => {
                         cb(null, require('containers/Dashboard').default)
@@ -54,38 +54,31 @@ export default store => {
                 }} >
                 <IndexRoute getComponent={(location, cb) => {
                     require.ensure([], require => {
-                        cb(null, require('containers/ViewBookings').default)
+                        cb(null, require('containers/GestionPersonas').default)
                     }, 'viewBookingsIndex')
                 }} />,
                 <Route
-                    key="bookings"
-                    path="bookings"
+                    key="votantes"
+                    path="votantes"
                     getComponent={(location, cb) => {
                         require.ensure([], require => {
-                            cb(null, require('containers/Bookings').default)
-                        }, 'bookings')
+                            cb(null, require('containers/Votantes').default)
+                        }, 'votantes')
                     }} >
                     <IndexRoute getComponent={(location, cb) => {
                         require.ensure([], require => {
-                            cb(null, require('containers/ViewBookings').default)
-                        }, 'viewBookingsIndex')
-                    }} />,
+                            cb(null, require('containers/Votantes/Ver').default)
+                        }, 'indexVotantes')
+                    }} />
                     <Route
-                        key="addBookings"
-                        path="add"
+                        key="nuevoVotante"
+                        path="nuevo"
                         getComponent={(location, cb) => {
                             require.ensure([], require => {
-                                cb(null, require('containers/BookingsManagement').default)
-                            }, 'addBookings')
-                        }} />,
-                    <Route
-                        key="updateBookings"
-                        path="update/:id"
-                        getComponent={(location, cb) => {
-                            require.ensure([], require => {
-                                cb(null, require('containers/BookingsManagement').default)
-                            }, 'updateBookings')
-                        }} />,
+                                cb(null, require('containers/Votantes/Nuevo').default)
+                            }, 'nuevoVotante')
+                        }} >
+                    </Route>,
                 </Route>,
             </Route>,
             <Route

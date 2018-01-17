@@ -209,7 +209,7 @@ export function getToken() {
 
 export function saveToken(token) {
     //Necesitamos enviar en el token el esquema del portador
-    token = token ? `Bearer ${token}` : ''
+    token = token ? token : ''
 
     if (supportLocalStorage()) {
         localStorage.setItem("JC-Token", token)

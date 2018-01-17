@@ -6,7 +6,7 @@ import { Menu, Icon } from 'antd';
 const SubMenu = Menu.SubMenu;
 /* Utils */
 import {
-    SELECT_MENU_ITEM_ALL_BOOKING,
+    SELECT_MENU_ITEM_VOTANTES,
     SELECT_MENU_ITEM_ADD_BOOKING
 } from '../utils/keys'
 
@@ -23,18 +23,18 @@ class LeftMenu extends React.Component {
         return (
             <Menu onClick={this.selectItem}
                 defaultSelectedKeys={[menuItemSelected]}
-                defaultOpenKeys={['booking_group']}
+                defaultOpenKeys={['votacion']}
                 mode="inline"
                 theme="dark">
-                <SubMenu key="booking_group" title={<span><Icon type="appstore" /><span>Bookings</span></span>}>
-                    <Menu.Item key={SELECT_MENU_ITEM_ALL_BOOKING}>
-                        <Link to="/dashboard/bookings">
-                            Show All Bookings
+                <SubMenu key="votacion" title={<span><Icon type="appstore" /><span>Votación</span></span>}>
+                    <Menu.Item key={SELECT_MENU_ITEM_VOTANTES}>
+                        <Link to="/dashboard/votantes">
+                            Votantes
                         </Link>
                     </Menu.Item>
                     <Menu.Item key={SELECT_MENU_ITEM_ADD_BOOKING} >
-                        <Link to="/dashboard/bookings/add">
-                            Add booking
+                        <Link to="/dashboard/votantes/nuevo">
+                            Nuevo votante
                         </Link>
                     </Menu.Item>
                 </SubMenu>

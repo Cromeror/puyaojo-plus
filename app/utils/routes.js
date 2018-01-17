@@ -1,7 +1,7 @@
 import {
     SELECT_MENU_ITEM_DEFAULT,
     SELECT_MENU_ITEM_ADD_BOOKING,
-    SELECT_MENU_ITEM_ALL_BOOKING,
+    SELECT_MENU_ITEM_VOTANTES,
     SELECT_MENU_ITEM_UPDATE_BOOKING
 } from 'utils/keys'
 import { selectMenuItem as selectMenuItemAction } from 'actions/ui'

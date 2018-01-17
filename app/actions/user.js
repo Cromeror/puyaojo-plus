@@ -18,7 +18,7 @@ export function login(data) {
     return dispatch => {
         userService.login({ ...data }).then(response => {
             if (response.status == 201 && response.data) {
-                saveToken(response.data.token)
+                saveToken(response.data.accessToken)
                 selectMenuItem(SELECT_MENU_ITEM_DEFAULT)
                 dispatch({ type: USER_LOGIN, data: { ...response.data.user, token: response.data.accessToken } })
             } else {

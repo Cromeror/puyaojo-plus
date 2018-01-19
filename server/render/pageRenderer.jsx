@@ -18,7 +18,6 @@ const buildPage = ({ componentHTML, initialState, headAssets }) => {
         ${headAssets.title.toString()}
         ${headAssets.meta.toString()}
         ${headAssets.link.toString()}
-        ${createTrackingScript()}
       </head>
       <body>
         <div id="app" style="height: 100%;"><div>${componentHTML}</div></div>

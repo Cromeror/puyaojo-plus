@@ -4,7 +4,7 @@ import {
     USER_LOGIN_ERROR,
     SELECT_MENU_ITEM
 } from '../types'
-import { SELECT_MENU_ITEM_DEFAULT } from '../utils/keys'
+import keys from '../utils/keys'
 import userService from '../services/user'
 import { saveToken } from '../helpers/helpers'
 import { selectMenuItem } from '../actions/ui'
@@ -19,7 +19,7 @@ export function login(data) {
         userService.login({ ...data }).then(response => {
             if (response.status == 201 && response.data) {
                 saveToken(response.data.accessToken)
-                selectMenuItem(SELECT_MENU_ITEM_DEFAULT)
+                selectMenuItem(keys.SELECT_MENU_ITEM_DEFAULT)
                 dispatch({ type: USER_LOGIN, data: { ...response.data.user, token: response.data.accessToken } })
             } else {
                 /**Dejar aqui hasta que se descarte el tratamiento de otras respuestas http distintas a las de error */

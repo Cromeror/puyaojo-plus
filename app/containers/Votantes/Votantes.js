@@ -80,22 +80,27 @@ class VerVotantes extends React.Component {
 
         this.state = {
             datos: [],
-            headers: []
+            headers: [],
+            scroll: { x: 1500, y: 500 }
         }
     }
 
     componentWillReceiveProps(nextProps, nextState) {
-        if (this.props) {
-            if (this.props.user != nextProps.user)
-                services.find(nextProps.user.token)
-                    .then(bookings => {
-                        this.setState({ datos: bookings.data })
-                    })
+        if (this.props.user != nextProps.user) {
+            this.loadData(nextProps.user.token)
+        }
+    }
+
+    componentWillMount() {
+        const { user, onRowClick } = this.props
+        if (user) {
+            this.loadData(user.token)
         }
     }
 
     render() {
-        const { datos, headers } = this.state
+        const { datos, headers, scroll } = this.state,
+            { onRowClick } = this.props
         return (
             <div >
                 <div className="row">
@@ -104,11 +109,22 @@ class VerVotantes extends React.Component {
                             searchVisible
                             columns={columns}
                             dataSource={datos}
+                            onRowClick={onRowClick}
+                            scroll={scroll}
                             id='votantes' />
                     </div>
                 </div>
             </div>
         )
+    }
+
+    loadData = (token) => {
+        if (token) {
+            services.find(token)
+                .then(bookings => {
+                    this.setState({ datos: bookings.data })
+                })
+        }
     }
 }
 

@@ -3,8 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Link } from 'react-router'
 import axios from 'axios'
-import { isProduction } from '../../config/app';
-
+import { isProduction } from '../../config/app'
 /* Config */
 import { serverConfig, emails } from '../../config/localConfig'
 import { ENV } from '../../config/env'
@@ -12,7 +11,7 @@ import { ENV } from '../../config/env'
 import Page from 'pages/Page'
 import { title as metaTitle, meta, link } from 'pages/assets'
 /* Components */
-import { Layout, Menu, Breadcrumb, Button } from 'antd';
+import { Layout, Menu, Breadcrumb, Button } from 'antd'
 /* Actions */
 import { logout, getUserInfo } from '../actions/user'
 import { getAllData } from 'actions/example'
@@ -21,32 +20,12 @@ import { initUIVars } from 'actions/ui'
 import { getToken } from 'helpers/helpers'
 /**Images */
 import jts_logo from 'images/logo-white.png'
-
 /* Styles */
 if (isProduction || __DEVCLIENT__) {
     require('css/main.scss')
 }
 
-const { Header, Content, Footer } = Layout;
-/* Modal instance */
-const Modal = React.createClass({
-    onClose() {
-        var select = document.querySelector('html')
-        select.style.overflow = 'auto'
-    },
-    render() {
-        const { children, returnTo } = this.props
-        return (
-            <div className="modal">
-                <Link className="modalOuter"></Link>
-                <div className="modalContent hero">
-                    <Link to={returnTo} onClick={this.onClose}><i style={{ color: 'gray' }} className={cx("material-icons", "modalClose")}>close</i></Link>
-                    {children}
-                </div>
-            </div>
-        )
-    }
-})
+const { Header, Content, Footer } = Layout
 
 class App extends React.Component {
     constructor(props) {
@@ -67,13 +46,8 @@ class App extends React.Component {
     }
 
     render() {
-        const { data, modal, location, children, user } = this.props
+        const { data, location, children, user } = this.props
 
-        let isModal = (
-            location.state &&
-            location.state.modal &&
-            this.previousChildren
-        )
         return (
             <Page title={metaTitle} meta={meta} link={link}>
                 <Layout>
@@ -81,7 +55,7 @@ class App extends React.Component {
                         <Link to="/" className="logo">
                             <div style={{ margin: 'auto' }}>
                                 <label >Powered by</label>
-                                <img className={"noPadding"} src={jts_logo} height="34px" />
+                                {/* <img className={"noPadding"} src={jts_logo} height="34px" /> */}
                             </div>
                         </Link>
                         {user.authenticated && this.loadUserNavBar(user.data)}
@@ -91,7 +65,7 @@ class App extends React.Component {
                         <div >
                             <label >Powered by</label>
                             <Link to="/">
-                                <img className={"noPadding"} src={jts_logo} height="34px" />
+                                {/* <img className={"noPadding"} src={jts_logo} height="34px" /> */}
                             </Link>
                         </div>
                     </Footer>
@@ -115,7 +89,6 @@ class App extends React.Component {
 function mapStateToProps(state) {
     return {
         data: state.data,
-        modal: state.ui.modal,
         user: state.user
     }
 }

@@ -8,7 +8,7 @@ import LeftMenu from '../components/LeftMenu'
 import { pushPath } from 'helpers/helpers'
 /* Styles */
 if (__DEVCLIENT__) {
-    require('css/dashboard.scss')
+    require('./dashboard.scss')
 }
 
 class Dashboard extends React.Component {

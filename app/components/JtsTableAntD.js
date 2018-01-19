@@ -7,10 +7,13 @@ import {
     Col,
     Input,
     Button,
-    Select
+    Select,
+    Icon
 } from 'antd'
 
-const Option = Select.Option
+const Option = Select.Option,
+    Search = Input.Search
+
 class JtsTableAntD extends React.Component {
     constructor(props) {
         super(props)
@@ -19,18 +22,23 @@ class JtsTableAntD extends React.Component {
             columns: props.columns ? props.columns : new Array(),
             dataSource: props.dataSource ? props.dataSource : new Array(),
             queryCriteria: 'default',
-            query: ''
+            query: '',
+            scroll: { x: 1000, y: 500 }
         }
     }
 
     componentWillReceiveProps(nextProps) {
-        if (this.props.dataSource != nextProps.dataSource)
-            this.setState({ dataSource: nextProps.dataSource })
+        if (this.props) {
+            if (this.props.dataSource != nextProps.dataSource)
+                this.setState({ dataSource: nextProps.dataSource })
+            if (this.props.scroll != nextProps.scroll)
+                this.setState({ scroll: nextProps.scroll })
+        }
     }
 
     render() {
         const { columns, dataSource } = this.state
-        const { id, searchVisible } = this.props
+        const { id, searchVisible, onRowClick } = this.props
         const defaultColumns = this.props.columns
 
         return (
@@ -40,22 +48,31 @@ class JtsTableAntD extends React.Component {
                         this.loadTableCustomizer(defaultColumns)}
                 </Row>
                 {searchVisible &&
-                    <Row gutter={16} style={{ marginTop: 20 }}>
+                    <Row gutter={16} style={{ marginTop: 20, marginBottom: 10 }}>
                         <Col
                             key='query-criteria-content'
                             sm={24}
-                            md={8}>
+                            md={3}>
                             {this.loadOptionSearch(columns)}
                         </Col>
                         <Col
                             sm={24}
-                            md={8}>
-                            <Input
-                                onChange={this.onInputChange}
-                                placeholder='Search' />
-                        </Col>
-                        <Col>
-                            <Button type="primary" onClick={this.onSearch} >Search</Button>
+                            md={9}>
+                            <Row gutter={12}>
+                                <Col
+                                    md={20}>
+                                    <Search
+                                        id="input-search"
+                                        placeholder="Input search text"
+                                        onSearch={value => this.onSearch(value)}
+                                        enterButton
+                                    />
+                                </Col>
+                                <Col
+                                    md={4}>
+                                    <Button shape="circle" icon="close" onClick={this.onSearchClear} />
+                                </Col>
+                            </Row>
                         </Col>
                     </Row>
                 }
@@ -64,7 +81,10 @@ class JtsTableAntD extends React.Component {
                     id={id}
                     columns={columns}
                     dataSource={dataSource}
-                    scroll={{ x: 1500, y: 500 }} />
+                    scroll={this.state.scroll}
+                    size={this.props.size || 'default'}
+                    onRowClick={this.props.onRowClick || null}
+                    bordered />
             </div>
         )
     }
@@ -77,33 +97,44 @@ class JtsTableAntD extends React.Component {
     }
 
     /**
-     * Permite conocer el valor a buscar en la tabla
-     */
-    onInputChange = (e) => {
-        this.setState({ query: e.target.value });
-    }
-
-    /**
      * Realiza la busqueda tomando los valores que ingresa el usuario
      * en el campo de busqueda
      */
     onSearch = (e) => {
         const { query, queryCriteria } = this.state,
             { dataSource } = this.props,
-            reg = new RegExp(query, 'gi')
+            reg = new RegExp(e, 'gi')
         let result = new Array()
 
         for (const data of dataSource) {
-            const
-                dataValue = queryCriteria == 'default' || queryCriteria == 'all'
-                    ? JSON.stringify(data)
-                    : (data[queryCriteria] ? data[queryCriteria] : ''),
-                match = dataValue.match(reg)
-            if (match) {
+            let dataValue = ''
+
+            /**
+             * Verificamos el criterio de busqueda, si busca por ALL tenemos que
+             * obtener solo los valores de las columnas visible.
+             */
+            if (queryCriteria == 'default' || queryCriteria == 'all') {
+                for (const column of this.state.columns) {
+                    dataValue += column.dataIndex
+                        ? data[column.dataIndex] || ''//Tambien verficamos que el dataIndex buscado exista
+                        : ''
+                }
+            } else
+                dataValue = data[queryCriteria] || ''
+
+            if (dataValue.match(reg)) {
                 result.push(data)
             }
         }
         this.setState({ dataSource: result })
+    }
+
+    /**
+     * Realiza una limpieza de los resultados de busqueda
+     */
+    onSearchClear = (e) => {
+        document.getElementById('input-search').value = ''
+        this.setState({ dataSource: this.props.dataSource })
     }
 
     onSelectColum = e => {
@@ -116,7 +147,6 @@ class JtsTableAntD extends React.Component {
 
     loadOptionSearch = (columns) => {
         let options = new Array()
-        options.push(<Option key='default' value='default'>Select column for search</Option>)
         options.push(<Option key='all' value='all'>All</Option>)
         for (const column of columns) {
             options.push(
@@ -129,7 +159,7 @@ class JtsTableAntD extends React.Component {
         return (
             <Select
                 key='query-criteria'
-                defaultValue="default"
+                defaultValue="all"
                 style={{ width: '100%' }}
                 onChange={this.handleChange}>
                 {options}
@@ -165,17 +195,31 @@ class JtsTableAntD extends React.Component {
         return checkboxes
     }
 
+    /**
+     * Remueve una columna de la tabla
+     */
     removeHeaderItem = (index) => {
         this.setState(prevState => {
             let columns = [...prevState.columns]
             for (let i = 0; columns.length; i++) {
                 if (columns[i].key === index) {
                     columns.splice(i, 1)
+                    this.setState({ scroll: { x: this.resizeTableX(columns.length), y: this.state.y } })
                     break
                 }
             }
             return { columns }
         })
+    }
+
+    /**
+     * Recalcula el ancho de la tabla distribuyendo equitativamente el ancho de las columnas.
+     * 
+     * **Importante:** No tiene en cuenta las columnas que tienen ancho personalizado.
+     */
+    resizeTableX = (columns) => {
+        let x = this.state.scroll.x / columns//Calculamos el valor por columna equitativamente
+        return x * (columns - 1)//Restamos una columna y recalculamos el tamaño total de la tabla
     }
 
     addHeaderItem = index => {

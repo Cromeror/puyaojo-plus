@@ -70,115 +70,28 @@ class BookingsManagement extends React.Component {
         }
     }
 
-    componentWillMount() {
-        const { params, form, route } = this.props
-        /**
-         * Verificamos la ruta para saber si cargar o no la informacion del usuario
-         */
-        if (route.path === updatePath) {
-            services.get(params.id)
-                .then(response => {
-                    this.loadBookingInformation(response.data)
-                    this.setState({ method: 'update' })
-                })
-                .catch(error => {
-                    Modal.error({
-                        title: 'Contact the guys, an error has occurred.',
-                        content: `Code error ${error.response.data.code}: ${error.response.data.message}`,
-                    })
-                    pushPath('/dashboard/bookings')
-                })
-        }
-    }
-
-    componentWillUpdate(nextProps, nextState) {
-        const { form, route } = nextProps
-        /**
-         * Validamos si la ruta cambio, de esta manera sabemos si paso de /update:id a /add
-         *
-         * Importante verificar la variable *isReset* con esta variable garantizamos que no se
-         * borre la informacion cada vez que se actualice el componente
-         */
-        /* if (route.path != updatePath && !this.state.isReset) {
-            this.props.form.resetFields()
-            this.setState({ isReset: true })
-        } */
-    }
-
     render() {
-        const { getFieldDecorator } = this.props.form
-        const { phone } = this.state
+        const { data } = this.props,
+            { getFieldDecorator } = this.props.form,
+            { phone } = this.state
+
+        if (!data)
+            return <Row>No data</Row>
 
         return (
             <Row>
-                <Col span={18}>
-                    <Form onSubmit={this.handleGuardarVotante}>
-                        <Row gutter={12}>{/* 
-                            <Col span={24}>
-                                <FormItem label="Product">
-                                    {getFieldDecorator('item_id', config.product)(
-                                        <AutoComplete
-                                            name="item_id"
-                                            dataSource={this.state.productMatch}
-                                            onChange={this.autocompleteProduct}
-                                            placeholder="Type the product to book" />)}
-                                </FormItem>
-                            </Col> */}
-                            <Col span={8}>
-                                <FormItem label="Cédula">
-                                    {getFieldDecorator('cedula', config.cedula)
-                                        (<InputNumber className='inputnumber-full-width' />)}
-                                </FormItem>
-                            </Col>
-                            <Col span={8}>
-                                <FormItem label="Nombre">
-                                    {getFieldDecorator('nombre', config.nombre)
-                                        (<Input />)}
-                                </FormItem>
-                            </Col>
-                            <Col span={8}>
-                                <FormItem label="Apellido">
-                                    {getFieldDecorator('apellido')
-                                        (<Input />)}
-                                </FormItem>
-                            </Col>
-                            <Col span={8}>
-                                <FormItem label="Dirección">
-                                    {getFieldDecorator('direccion')
-                                        (<Input />)}
-                                </FormItem>
-                            </Col>
-                            <Col span={8}>
-                                <FormItem label="Teléfono">
-                                    {getFieldDecorator('telefono')
-                                        (<InputNumber className='inputnumber-full-width' />)}
-                                </FormItem>
-                            </Col>
-                            <Col span={8}>
-                                <FormItem label="Teléfono celular">
-                                    {getFieldDecorator('celular')
-                                        (<InputNumber className='inputnumber-full-width' />)}
-                                </FormItem>
-                            </Col>
-                            <Col span={8}>
-                                <FormItem label="Correo Electrónico">
-                                    {getFieldDecorator('correo', config.correo)
-                                        (<Input placeholder="john@mail.com" />)}
-                                </FormItem>
-                            </Col>
-                        </Row>
-                        <Row gutter={12} type="flex" justify="center">
-                            <Col
-                                span={3}>
-                                <Link to='/dashboard' className="ant-btn ant-btn-primary width-parent">Cancel</Link>
-                            </Col>
-                            <Col
-                                span={3} >
-                                <Button className='width-parent' type="primary" htmlType="submit">Save</Button>
-                            </Col>
-                        </Row>
-                    </Form>
-                </Col>
+                <h1>{data.nombre} {data.apellido}</h1>
+                <h3>{data.cedula}</h3>
+                <h4>{data.direccion}</h4>
+                <h4>{data.telefono}</h4>
+                <h4>{data.celular}</h4>
+                <h4>{data.correo}</h4>
+                <Row gutter={12} type="flex" justify="center">
+                    <Col
+                        span={12} >
+                        <Button className='width-parent' type="primary" htmlType="submit">Guardar</Button>
+                    </Col>
+                </Row>
             </Row >
         )
     }

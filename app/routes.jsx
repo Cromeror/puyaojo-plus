@@ -65,20 +65,15 @@ export default store => {
                             cb(null, require('containers/Votantes').default)
                         }, 'votantes')
                     }} >
-                    <IndexRoute getComponent={(location, cb) => {
+                </Route>,
+                <Route
+                    key="consultar"
+                    path="consultar"
+                    getComponent={(location, cb) => {
                         require.ensure([], require => {
-                            cb(null, require('containers/Votantes/Ver').default)
-                        }, 'indexVotantes')
-                    }} />
-                    <Route
-                        key="nuevoVotante"
-                        path="nuevo"
-                        getComponent={(location, cb) => {
-                            require.ensure([], require => {
-                                cb(null, require('containers/Votantes/Nuevo').default)
-                            }, 'nuevoVotante')
-                        }} >
-                    </Route>,
+                            cb(null, require('containers/PuestoVotacion').default)
+                        }, 'consultar')
+                    }} >
                 </Route>,
             </Route>,
             <Route

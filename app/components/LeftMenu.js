@@ -5,10 +5,7 @@ import { Link } from 'react-router'
 import { Menu, Icon } from 'antd';
 const SubMenu = Menu.SubMenu;
 /* Utils */
-import {
-    SELECT_MENU_ITEM_VOTANTES,
-    SELECT_MENU_ITEM_ADD_BOOKING
-} from '../utils/keys'
+import keys from '../utils/keys'
 
 class LeftMenu extends React.Component {
     constructor(props) {
@@ -27,14 +24,30 @@ class LeftMenu extends React.Component {
                 mode="inline"
                 theme="dark">
                 <SubMenu key="votacion" title={<span><Icon type="appstore" /><span>Votación</span></span>}>
-                    <Menu.Item key={SELECT_MENU_ITEM_VOTANTES}>
+                    <Menu.Item key={keys.SELECT_MENU_ITEM_DEFAULT}>
+                        <Link to="/dashboard/votantes">
+                            Escritorio
+                        </Link>
+                    </Menu.Item>
+                    <Menu.Item key={keys.SELECT_MENU_ITEM_VOTANTES}>
                         <Link to="/dashboard/votantes">
                             Votantes
                         </Link>
                     </Menu.Item>
-                    <Menu.Item key={SELECT_MENU_ITEM_ADD_BOOKING} >
-                        <Link to="/dashboard/votantes/nuevo">
-                            Nuevo votante
+                    <Menu.Item key={keys.SELECT_MENU_ITEM_LIDERES} >
+                        <Link to="/dashboard">
+                            Lideres
+                        </Link>
+                    </Menu.Item>
+                    <Menu.Item key={keys.SELECT_MENU_ITEM_CONSULTAR} >
+                        <Link to="/dashboard/consultar">
+                            Consultar
+                        </Link>
+                    </Menu.Item>
+
+                    <Menu.Item key={keys.SELECT_MENU_ITEM_CERRAR_SESION} >
+                        <Link to="/dashboard">
+                            Cerrar sesión
                         </Link>
                     </Menu.Item>
                 </SubMenu>

@@ -5,7 +5,7 @@ import {
     Col,
     Input
 } from 'antd'
-import ResultadoConsulta from 'containers/commons/ResultadoConsulta'
+import DetallePersona from 'containers/commons/modals/DetallePersona'
 /* Actions */
 /*Services */
 /*Helpers */
@@ -23,6 +23,7 @@ class PuestoVotacion extends React.Component {
     }
 
     render() {
+        console.log(this.state.showResult)
         return (
             <Row type="flex" justify="center">
                 <Col md={6}>
@@ -32,7 +33,7 @@ class PuestoVotacion extends React.Component {
                         onSearch={value => this.onSearch(value)}
                         enterButton />
                 </Col>
-                <ResultadoConsulta
+                <DetallePersona
                     visible={this.state.showResult} />
             </Row >
         )

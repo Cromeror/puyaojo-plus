@@ -4,7 +4,15 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router'
 /* Components */
 import JtsTableAntD from 'components/JtsTableAntD'
-import { Table, Icon, Divider } from 'antd'
+import {
+    Table,
+    Icon,
+    Divider,
+    Col,
+    Row,
+    Button
+} from 'antd'
+import Detalle from './Detalle'
 /* Actions */
 /*Services */
 import services from 'services/votantes'
@@ -81,7 +89,10 @@ class VerVotantes extends React.Component {
         this.state = {
             datos: [],
             headers: [],
-            scroll: { x: 1500, y: 500 }
+            scroll: { x: 1500, y: 500 },
+            rowSelected: null,
+            widthMaster: 24,
+            widthDetail: 0
         }
     }
 
@@ -99,23 +110,39 @@ class VerVotantes extends React.Component {
     }
 
     render() {
-        const { datos, headers, scroll } = this.state,
-            { onRowClick } = this.props
+        const {
+            datos,
+            headers,
+            scroll,
+            widthDetail,
+            widthMaster } = this.state
+
         return (
-            <div >
-                <div className="row">
-                    <div className="col s12">
-                        <JtsTableAntD
-                            searchVisible
-                            columns={columns}
-                            dataSource={datos}
-                            onRowClick={onRowClick}
-                            scroll={scroll}
-                            id='votantes' />
-                    </div>
-                </div>
-            </div>
+            <Row>
+                Votantes
+            <Button type="primary">Agregar</Button>
+                <Col span={widthMaster}>
+                    <JtsTableAntD
+                        searchVisible
+                        columns={columns}
+                        dataSource={datos}
+                        onRowClick={this.onRowClick}
+                        scroll={scroll}
+                        id='votantes' />
+                </Col>
+                <Col span={widthDetail}>
+                    <Detalle data={this.state.rowSelected} />
+                </Col>
+            </Row>
         )
+    }
+
+    onRowClick = (row) => {
+        this.setState({
+            widthMaster: 18,
+            widthDetail: 6,
+            rowSelected: row
+        })
     }
 
     loadData = (token) => {

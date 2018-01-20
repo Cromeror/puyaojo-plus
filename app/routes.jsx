@@ -65,6 +65,15 @@ export default store => {
                             cb(null, require('containers/Votantes').default)
                         }, 'votantes')
                     }} >
+                    <Route
+                        key="votantesAgregar"
+                        path="agregar"
+                        getComponent={(location, cb) => {
+                            require.ensure([], require => {
+                                cb(null, require('containers/Votantes').default)
+                            }, 'votantesAgregar')
+                        }} >
+                    </Route>,
                 </Route>,
                 <Route
                     key="consultar"

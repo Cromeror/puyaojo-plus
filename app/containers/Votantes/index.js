@@ -11,6 +11,9 @@ import { Button } from 'antd';
 if (__DEVCLIENT__) {
     require('./style.scss')
 }
+const
+    ADD = '/dashboard/votantes/agregar',
+    UPDATE = '/dashboard/votantes/actualizar'
 
 class Dashboard extends React.Component {
     constructor(props) {
@@ -22,28 +25,30 @@ class Dashboard extends React.Component {
         }
     }
 
+    componentWillMount() {
+        if (this.props) {
+            if (this.props.location) {
+                const pathname = this.props.location.pathname
+                switch (pathname) {
+                    case ADD:
+                        break;
+                    case UPDATE:
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+    }
+
     render() {
         const { widthDetail, widthMaster } = this.state
         return (
             <Row>
                 Votantes
-                <Button type="primary">Agregar</Button>
-                <Col span={widthMaster}>
-                    <Votantes
-                        onRowClick={this.onRowClick} />
-                </Col>
-                <Col span={widthDetail}>
-                    <Detalle data={this.state.rowSelected} />
-                </Col>
+                <Votantes
+                    onRowClick={this.onRowClick} />
             </Row>)
-    }
-
-    onRowClick = (row) => {
-        this.setState({
-            widthMaster: 18,
-            widthDetail: 6,
-            rowSelected: row
-        })
     }
 }
 

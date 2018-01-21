@@ -119,10 +119,10 @@ class VerVotantes extends React.Component {
             widthMaster } = this.state
 
         return (
-            <Row>
+            <Row gutter={12}>
                 <h1>Votantes</h1>
-                <Link to={utilPathnames.PATH_VOTANTES_AGREGAR}>Agregar</Link>
                 <Col span={widthMaster}>
+                    <Link to={utilPathnames.PATH_VOTANTES_AGREGAR}>Agregar</Link>
                     <JtsTableAntD
                         searchVisible
                         columns={columns}

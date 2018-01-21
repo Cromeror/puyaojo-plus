@@ -107,5 +107,15 @@ const recapchaScript = () => {
   return `<script src='https://www.google.com/recaptcha/api.js' async defer></script>`
 }
 
-export { recapchaScript, createTrackingScript, createAppScript, inspectlect, googleMaps, wurfl, zohoBehavior, dfp, adx, dfpDonde, createFacebookPixelTrackingScript };
+export const xqueryScript = () => {
+  return `<script type="text/javascript" src="mxqueryjs/mxqueryjs.nocache.js"></script>`
+}
+
+export {
+  recapchaScript,
+  createTrackingScript,
+  createAppScript, inspectlect, googleMaps, wurfl,
+  zohoBehavior, dfp, adx, dfpDonde,
+  createFacebookPixelTrackingScript
+};
 

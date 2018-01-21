@@ -5,7 +5,7 @@ import { Link } from 'react-router'
 import { Menu, Icon } from 'antd';
 const SubMenu = Menu.SubMenu;
 /* Utils */
-import keys from '../utils/keys'
+import { pathnames, keys } from '../utils/keys'
 
 class LeftMenu extends React.Component {
     constructor(props) {
@@ -35,16 +35,15 @@ class LeftMenu extends React.Component {
                         </Link>
                     </Menu.Item>
                     <Menu.Item key={keys.SELECT_MENU_ITEM_LIDERES} >
-                        <Link to="/dashboard">
+                        <Link to={pathnames.PATH_LIDERES}>
                             Lideres
                         </Link>
                     </Menu.Item>
                     <Menu.Item key={keys.SELECT_MENU_ITEM_CONSULTAR} >
-                        <Link to="/dashboard/consultar">
+                        <Link to={pathnames.PATH_CONSULTAR}>
                             Consultar
                         </Link>
                     </Menu.Item>
-
                     <Menu.Item key={keys.SELECT_MENU_ITEM_CERRAR_SESION} >
                         <Link to="/dashboard">
                             Cerrar sesión

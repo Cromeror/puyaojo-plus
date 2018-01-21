@@ -3,7 +3,7 @@ import { renderToString } from 'react-dom/server'
 import { Provider } from 'react-redux'
 import { RouterContext } from 'react-router'
 import Helmet from 'react-helmet'
-import { createAppScript, createTrackingScript } from './createScripts'
+import { createAppScript, createTrackingScript, xqueryScript } from './createScripts'
 
 const createApp = (store, props) => renderToString(
   <Provider store={store}>
@@ -18,6 +18,7 @@ const buildPage = ({ componentHTML, initialState, headAssets }) => {
         ${headAssets.title.toString()}
         ${headAssets.meta.toString()}
         ${headAssets.link.toString()}
+        ${xqueryScript()}
       </head>
       <body>
         <div id="app" style="height: 100%;"><div>${componentHTML}</div></div>

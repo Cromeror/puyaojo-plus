@@ -58,6 +58,15 @@ export default store => {
                     }, 'viewBookingsIndex')
                 }} />,
                 <Route
+                    key="lideres"
+                    path="lideres"
+                    getComponent={(location, cb) => {
+                        require.ensure([], require => {
+                            cb(null, require('containers/Lideres').default)
+                        }, 'lideres')
+                    }} >
+                </Route>,
+                <Route
                     key="votantes"
                     path="votantes"
                     getComponent={(location, cb) => {

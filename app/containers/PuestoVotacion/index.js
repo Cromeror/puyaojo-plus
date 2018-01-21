@@ -23,7 +23,6 @@ class PuestoVotacion extends React.Component {
     }
 
     render() {
-        console.log(this.state.showResult)
         return (
             <Row type="flex" justify="center">
                 <Col md={6}>

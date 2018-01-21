@@ -18,6 +18,7 @@ import Detalle from './Detalle'
 import services from 'services/votantes'
 /*Helpers */
 import { objectSorter } from 'helpers/helpers'
+import { pathnames as utilPathnames } from '../../utils/keys'
 
 const dateFormat = 'YYYY/MM/DD'
 const columns = [
@@ -119,8 +120,8 @@ class VerVotantes extends React.Component {
 
         return (
             <Row>
-                Votantes
-            <Button type="primary">Agregar</Button>
+                <h1>Votantes</h1>
+                <Link to={utilPathnames.PATH_VOTANTES_AGREGAR}>Agregar</Link>
                 <Col span={widthMaster}>
                     <JtsTableAntD
                         searchVisible

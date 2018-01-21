@@ -50,13 +50,13 @@ class Consultar extends React.Component {
         return (
             <Row>
                 <Col span={18}>
-                    <Form onSubmit={this.handleSaveBooking}>
-                        <Col span={8}>
+                    <Form onSubmit={this.handleSave}>
+                       {/*  <Col span={8}>
                             <FormItem label="Mesa">
                                 {getFieldDecorator('mesa')
                                     (<Input />)}
                             </FormItem>
-                        </Col>
+                        </Col> */}
                         <Row gutter={12} type="flex" justify="center">
                             <Col
                                 span={3}>
@@ -73,71 +73,8 @@ class Consultar extends React.Component {
         )
     }
 
-    getSummary = () => {
-        const dataForm = this.props.form.getFieldsValue(),
-            summary = this.state.summary
-        let summaryJSX = <p>No data</p>
-
-        if (summary)
-            summaryJSX = [
-                <p key='subtotal'>{(summary.currency).toUpperCase()} {summary.basePrice}X{summary.qty} = {summary.basePrice * summary.qty}</p>,
-                <p key='fee'>Service fee 5% = {summary.fee}</p>,
-                <p key='total'>Total = {summary.total}</p>]
-        return (
-            <Card bordered={false} style={{ width: 300, margin: 'auto' }}>
-                {summaryJSX}
-            </Card>)
-    }
-
-    updateSummary = () => {
-        const
-            { form } = this.props,
-            { language, checkInOut, currency, item_id, qty_people } = form.getFieldsValue()
-
-        if (qty_people && checkInOut && currency && language && item_id) {
-            services.getPrice(
-                (item_id.split(' - '))[0],
-                qty_people,
-                checkInOut[0].format('YYYY-MM-DD'),
-                checkInOut[1].format('YYYY-MM-DD'),
-                currency,
-                language)
-                .then(price => {
-                    this.setState({ summary: price.data })
-                })
-        }
-    }
-
-    //UPDATE BOOKING
-    /**
-     * Carga la información del booking en el formulario para actualizar
-     */
-    loadBookingInformation = (booking) => {
-        const { form } = this.props,
-            product = booking && booking.product.info
-                ? booking.product.info
-                : null
-
-        form.setFieldsValue({
-            user_phone: booking.user_phone,
-            discount: booking.discount ? booking.discount : 0,
-            checkInOut: [
-                moment(booking.start_date, dateFormat),
-                moment(booking.end_date, dateFormat)
-            ],
-            qty_people: booking.qty_people,
-            chat: booking.chat,
-            user_email: booking.user_email,
-            user_name: booking.user_name,
-            user_phone: booking.user_phone ? booking.user_phone : '',
-            language: booking.language,
-            currency: booking.currency,
-            item_id: (product && product.title) ? product.wp_id + ' - ' + product.title : ''
-        })
-    }
-
     //ADD BOOKING
-    handleSaveBooking = (e) => {
+    handleSave = (e) => {
         e.preventDefault();
         const { form, params } = this.props
 

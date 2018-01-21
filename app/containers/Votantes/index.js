@@ -1,19 +1,20 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import {
+    Button,
+    Col,
+    Row
+} from 'antd';
 /**Components */
 import Votantes from './Votantes'
-import Detalle from './Detalle'
+import Agregar from './Agregar'
 /* Helpers */
 import { pushPath } from 'helpers/helpers'
-import { Col, Row } from 'antd/lib/grid';
-import { Button } from 'antd';
+import { pathnames as utilPathnames } from '../../utils/keys'
 /* Styles */
 if (__DEVCLIENT__) {
     require('./style.scss')
 }
-const
-    ADD = '/dashboard/votantes/agregar',
-    UPDATE = '/dashboard/votantes/actualizar'
 
 class Dashboard extends React.Component {
     constructor(props) {
@@ -21,34 +22,44 @@ class Dashboard extends React.Component {
         this.state = {
             rowSelected: null,
             widthMaster: 24,
-            widthDetail: 0
+            widthDetail: 0,
+            child: null
         }
     }
 
     componentWillMount() {
         if (this.props) {
             if (this.props.location) {
-                const pathname = this.props.location.pathname
-                switch (pathname) {
-                    case ADD:
-                        break;
-                    case UPDATE:
-                        break;
-                    default:
-                        break;
-                }
+                this.renderChild(this.props.location.pathname)
             }
         }
     }
 
+    componentWillReceiveProps(nextProps, nextState) {
+        if (this.props.location != nextProps.location) {
+            this.renderChild(nextProps.location.pathname)
+        }
+    }
+
     render() {
-        const { widthDetail, widthMaster } = this.state
         return (
             <Row>
-                Votantes
-                <Votantes
-                    onRowClick={this.onRowClick} />
+                {this.state.child}
             </Row>)
+    }
+
+    renderChild = (pathname) => {
+        switch (pathname) {
+            case utilPathnames.PATH_VOTANTES_AGREGAR:
+                this.setState({ child: <Agregar /> })
+                break;
+            case utilPathnames.PATH_VOTANTES_ACTUALIZAR:
+                this.setState({ child: <Agregar /> })
+                break
+            default:
+                this.setState({ child: <Votantes /> })
+                break
+        }
     }
 }
 

@@ -8,12 +8,25 @@ export default {
     nombre: {
         rules: [{
             required: true,
-            message: 'Digite el nombre de la persona'
+            message: 'Digite el nombre del votante'
         }],
     },
-    correo: {
+    puesto: {
         rules: [{
-            message: 'Digite el correo electrónico de la persona'
+            required: true,
+            message: 'Digite el puesto de potación del votante'
+        }],
+    },
+    departamento: {
+        rules: [{
+            required: true,
+            message: 'Digite el puesto de potación del votante'
+        }],
+    },
+    municipio: {
+        rules: [{
+            required: true,
+            message: 'Digite el puesto de potación del votante'
         }],
     }
 }

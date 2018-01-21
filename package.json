@@ -153,6 +153,8 @@
     "webpack": "^1.13.2",
     "webpack-dev-middleware": "^1.5.1",
     "webpack-hot-middleware": "^2.12.2",
-    "wordpress-hash-node": "^1.0.0"
+    "wordpress-hash-node": "^1.0.0",
+    "xmldom": "^0.1.27",
+    "xpath": "0.0.27"
   }
 }

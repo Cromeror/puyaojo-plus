@@ -25,6 +25,7 @@ import AutoComplete from '../../components/AutoComplete'
 /* Actions */
 /*Services */
 import servicioPuesto from '../../services/puestos'
+import servicioVotantes from '../../services/votantes'
 /*Helpers */
 import { pushPath } from 'helpers/helpers'
 import config from './config'
@@ -190,31 +191,18 @@ class Agregar extends React.Component {
         }
     }
 
-    //ADD BOOKING
     handleSave = (e) => {
         e.preventDefault();
-        const { form, params } = this.props
-        /**Validacion de campos */
-        /**
-         * Validacion de campos del formulario, el callback recibe un ok
-         * que indica true si pasa la validacion o false si a sucedido un error.
-         */
-        this.validationForm(ok => {
-            const id = (params && params.id) ? params.id : null
-            if (ok) {
-                const votante = form.getFieldsValue()
-                console.log(votante)
-            }
-            //this.saveBooking(form, id)
-        })
-    }
-
-    /**
-     * Permite guardar el booking que se esta diligenciando
-     */
-    saveBooking = (form, id, status) => {
+        const { user, form } = this.props
         let data = form.getFieldsValue()
-        console.log(data)
+        data.zonificacion = {
+            puestoId: data.puesto,
+            mesa: data.mesa
+        }
+        servicioVotantes.add(data, user.token)
+            .then(r => {
+                console.log(r.data)
+            })
     }
 
     validationForm = (callback) => {

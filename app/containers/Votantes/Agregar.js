@@ -9,7 +9,6 @@ import moment, { lang } from 'moment'
 import {
     Input,
     InputNumber,
-    AutoComplete,
     Select,
     Row,
     Icon,
@@ -22,9 +21,10 @@ import {
     Modal
 } from 'antd'
 /* Components */
+import AutoComplete from '../../components/AutoComplete'
 /* Actions */
 /*Services */
-import consulta from '../../services/consulta'
+import servicioPuesto from '../../services/puestos'
 /*Helpers */
 import { pushPath } from 'helpers/helpers'
 import config from './config'
@@ -41,7 +41,8 @@ const RangePicker = DatePicker.RangePicker
 const RadioGroup = Radio.Group
 
 const updatePath = 'update/:id'
-let sending = false
+let sending = false,
+    puestosEncontrados = []
 
 /**
  * Importan en lo posible no usar componentWillReceiveProps genera un 
@@ -55,7 +56,8 @@ class Agregar extends React.Component {
             phone: {
                 value: 0,
             },
-            productMatch: [],
+            dataSourcePuesto: [],
+            puesto: null
         }
     }
 
@@ -69,11 +71,6 @@ class Agregar extends React.Component {
                     <Row gutter={24} type="flex" justify="center">
                         <Col span={14}>
                             <Row gutter={12}>
-                                {/* <Search
-                                id="input-search"
-                                placeholder="Digite número de cédula"
-                                onSearch={value => this.onSearch(value)}
-                                enterButton /> */}
                                 <Col span={24}>
                                     <FormItem label="Cédula">
                                         {getFieldDecorator('cedula', config.cedula)
@@ -117,7 +114,12 @@ class Agregar extends React.Component {
                                 <Col span={20}>
                                     <FormItem label="Puesto de votación">
                                         {getFieldDecorator('puesto', config.puesto)
-                                            (<Input />)}
+                                            (<AutoComplete
+                                                dataSource={this.state.dataSourcePuesto}
+                                                onChange={this.handleChangePuesto}
+                                                onSelect={this.selectPuesto}
+                                                placeholder="Ingrese"
+                                            />)}
                                     </FormItem>
                                 </Col>
                                 <Col span={4}>
@@ -156,8 +158,36 @@ class Agregar extends React.Component {
         )
     }
 
-    onSearch = (value) => {
-        console.log(value)
+    /**
+     * Maneja los cambios en cualquier campo que tenga que ver con el puesto de votacion
+     */
+    handleChangePuesto = (value) => {
+        const { user, form } = this.props
+        let dataForm = form.getFieldsValue()
+
+        if (user && user.token && dataForm.puesto) {
+            //Peticion a la base de datos
+            servicioPuesto.find(user.token, { puesto: dataForm.puesto })
+                .then(puestos => {
+                    puestosEncontrados = puestos.data
+                    let dataSourcePuesto = new Array()
+                    for (const elemento of puestosEncontrados) {
+                        dataSourcePuesto.push({ value: parseInt(elemento.id), text: elemento.puesto })
+                    }
+                    this.setState({ dataSourcePuesto })
+                })
+        }
+    }
+
+    selectPuesto = (value) => {
+        const { form } = this.props
+        for (const iterator of puestosEncontrados) {
+            if (value == iterator.id)
+                form.setFieldsValue({
+                    municipio: iterator.municipio,
+                    departamento: iterator.departamento
+                })
+        }
     }
 
     //ADD BOOKING
@@ -170,13 +200,12 @@ class Agregar extends React.Component {
          * que indica true si pasa la validacion o false si a sucedido un error.
          */
         this.validationForm(ok => {
-            /**
-             * Importante siempre verificar si recibimos el ID y obtenerlo
-             * para que saveBooking() pueda guardar o actualizar.
-             */
             const id = (params && params.id) ? params.id : null
-            if (ok)
-                this.saveBooking(form, id)
+            if (ok) {
+                const votante = form.getFieldsValue()
+                console.log(votante)
+            }
+            //this.saveBooking(form, id)
         })
     }
 
@@ -217,26 +246,6 @@ class Agregar extends React.Component {
 
             callback(true)
         })
-    }
-
-    /**
-     * Manejador de autocompletado, es usado en Input de producto.
-     */
-    autocompleteProduct = (value) => {
-        const { form } = this.props
-        if (value) {
-            let data = form.getFieldsValue()
-            listingServices.find({ s: value, lang: data.language ? data.language : 'en' })
-                .then(res => {
-                    let results = new Array()
-                    for (const element of res.data.listings.concat(res.data.events)) {
-                        results.push(`${element.wp_id} - ${element.title}`)
-                    }
-                    this.setState({
-                        productMatch: results
-                    });
-                })
-        }
     }
 }
 

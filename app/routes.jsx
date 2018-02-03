@@ -54,8 +54,8 @@ export default store => {
                 }} >
                 <IndexRoute getComponent={(location, cb) => {
                     require.ensure([], require => {
-                        cb(null, require('containers/GestionPersonas').default)
-                    }, 'viewBookingsIndex')
+                        cb(null, require('containers/Votantes').default)
+                    }, 'votantesIndex')
                 }} />,
                 <Route
                     key="lideres"

@@ -20,23 +20,18 @@ class LeftMenu extends React.Component {
         return (
             <Menu onClick={this.selectItem}
                 defaultSelectedKeys={[menuItemSelected]}
-                defaultOpenKeys={['votacion']}
+                defaultOpenKeys={['votacion', 'Liderazgo']}
                 mode="inline"
                 theme="dark">
+                <Menu.Item key={keys.SELECT_MENU_ITEM_DEFAULT}>
+                    <Link to="/dashboard/votantes">
+                        <span><Icon type="appstore" /><span>Escritorio</span></span>
+                    </Link>
+                </Menu.Item>
                 <SubMenu key="votacion" title={<span><Icon type="appstore" /><span>Votación</span></span>}>
-                    <Menu.Item key={keys.SELECT_MENU_ITEM_DEFAULT}>
-                        <Link to="/dashboard/votantes">
-                            Escritorio
-                        </Link>
-                    </Menu.Item>
                     <Menu.Item key={keys.SELECT_MENU_ITEM_VOTANTES}>
                         <Link to="/dashboard/votantes">
                             Votantes
-                        </Link>
-                    </Menu.Item>
-                    <Menu.Item key={keys.SELECT_MENU_ITEM_LIDERES} >
-                        <Link to={pathnames.PATH_LIDERES}>
-                            Lideres
                         </Link>
                     </Menu.Item>
                     <Menu.Item key={keys.SELECT_MENU_ITEM_CONSULTAR} >
@@ -44,12 +39,19 @@ class LeftMenu extends React.Component {
                             Consultar
                         </Link>
                     </Menu.Item>
-                    <Menu.Item key={keys.SELECT_MENU_ITEM_CERRAR_SESION} >
-                        <Link to="/dashboard">
-                            Cerrar sesión
+                </SubMenu>
+                <SubMenu key="Liderazgo" title={<span><Icon type="appstore" /><span>Liderazgo</span></span>}>
+                    <Menu.Item key={keys.SELECT_MENU_ITEM_LIDERES} >
+                        <Link to={pathnames.PATH_LIDERES}>
+                            Lideres
                         </Link>
                     </Menu.Item>
                 </SubMenu>
+                <Menu.Item key={keys.SELECT_MENU_ITEM_CERRAR_SESION} >
+                    <Link to="/dashboard">
+                        Cerrar sesión
+                        </Link>
+                </Menu.Item>
             </Menu>
         )
     }

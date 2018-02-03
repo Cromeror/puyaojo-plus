@@ -16,13 +16,10 @@ if (__DEVCLIENT__) {
     require('./style.scss')
 }
 
-class Dashboard extends React.Component {
+class Index extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            rowSelected: null,
-            widthMaster: 24,
-            widthDetail: 0,
             child: null
         }
     }
@@ -63,4 +60,4 @@ class Dashboard extends React.Component {
     }
 }
 
-export default (Dashboard)
+export default (Index)

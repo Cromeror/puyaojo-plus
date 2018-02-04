@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 /* Component */
 import { Layout } from 'antd';
 const { Content, Sider } = Layout;
-import LeftMenu from '../components/LeftMenu'
+import LeftMenu from '../../components/LeftMenu'
 /* Helpers */
 import { pushPath } from 'helpers/helpers'
 /* Styles */
@@ -26,12 +26,12 @@ class Dashboard extends React.Component {
 
     render() {
         return (
-            <Layout>
+            <Layout className='dashboard'>
                 <Sider width={200} style={{ background: '#fff' }}>
                     <LeftMenu />
                 </Sider>
                 <Layout>
-                    <Content style={{ background: '#fff', padding: 24, margin: 0, minHeight: 280 }}>
+                    <Content style={{ background: '#fff', padding: 24, margin: 0 }}>
                         {this.props.children}
                     </Content>
                 </Layout>

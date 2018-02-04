@@ -3,17 +3,17 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Link } from 'react-router'
 import axios from 'axios'
-import { isProduction } from '../../config/app'
 /* Config */
-import { serverConfig, emails } from '../../config/localConfig'
-import { ENV } from '../../config/env'
+import { serverConfig, emails } from '../../../config/localConfig'
+import { isProduction } from '../../../config/app'
+import { ENV } from '../../../config/env'
 /* Page meta */
 import Page from 'pages/Page'
 import { title as metaTitle, meta, link } from 'pages/assets'
 /* Components */
 import { Layout, Menu, Breadcrumb, Button } from 'antd'
 /* Actions */
-import { logout, getUserInfo } from '../actions/user'
+import { logout, getUserInfo } from 'actions/user'
 import { getAllData } from 'actions/example'
 import { initUIVars } from 'actions/ui'
 /* Helpers */
@@ -50,7 +50,7 @@ class App extends React.Component {
 
         return (
             <Page title={metaTitle} meta={meta} link={link}>
-                <Layout>
+                <Layout className='container'>
                     <Header>
                         <Link to="/" className="logo">
                             <div style={{ margin: 'auto' }}>

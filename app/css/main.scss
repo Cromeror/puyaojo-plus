@@ -3,6 +3,14 @@
 @import './datepicker-range.scss';
 @import './form.scss';
 
+[data-reactroot]{
+  height: 100%;
+}
+
+.container{
+  min-height: 100%;
+}
+
 .logo {
   height: 31px;
   margin: 16px 24px 16px 0;

@@ -1,11 +1,5 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 import { Link } from 'react-router'
-import serialize from 'form-serialize'
-var xpath = require('xpath')
-    , dom = require('xmldom').DOMParser
-import moment, { lang } from 'moment'
 import {
     Input,
     InputNumber,
@@ -22,7 +16,6 @@ import {
 } from 'antd'
 /* Components */
 import AutoComplete from '../../components/AutoComplete'
-/* Actions */
 /*Services */
 import servicioPuesto from '../../services/puestos'
 import servicioVotantes from '../../services/votantes'
@@ -60,6 +53,17 @@ class Agregar extends React.Component {
             dataSourcePuesto: [],
             puesto: null
         }
+    }
+
+    componentDidMount() {
+        const { userToken, votanteId, form } = this.props
+        if (votanteId)
+            servicioVotantes.get(votanteId, userToken)
+                .then(votante => {
+                    votante = votante.data
+                    //No me actualiza porque aun no esta registrado, tengo que encontrar el punto del ciclo de vida en conde el form esta registrado
+                    form.setFieldsValue(votante)
+                })
     }
 
     render() {
@@ -163,12 +167,12 @@ class Agregar extends React.Component {
      * Maneja los cambios en cualquier campo que tenga que ver con el puesto de votacion
      */
     handleChangePuesto = (value) => {
-        const { user, form } = this.props
+        const { userToken, form } = this.props
         let dataForm = form.getFieldsValue()
 
-        if (user && user.token && dataForm.puesto) {
+        if (userToken && dataForm.puesto) {
             //Peticion a la base de datos
-            servicioPuesto.find(user.token, { puesto: dataForm.puesto })
+            servicioPuesto.find(userToken, { puesto: dataForm.puesto })
                 .then(puestos => {
                     puestosEncontrados = puestos.data
                     let dataSourcePuesto = new Array()
@@ -193,13 +197,13 @@ class Agregar extends React.Component {
 
     handleSave = (e) => {
         e.preventDefault();
-        const { user, form } = this.props
+        const { userToken, form } = this.props
         let data = form.getFieldsValue()
         data.zonificacion = {
             puestoId: data.puesto,
             mesa: data.mesa
         }
-        servicioVotantes.add(data, user.token)
+        servicioVotantes.add(data, userToken)
             .then(r => {
                 console.log(r.data)
             })
@@ -237,16 +241,4 @@ class Agregar extends React.Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        user: state.user.data
-    }
-}
-
-function mapDispatchToProps(dispatch) {
-    return {
-        actions: bindActionCreators({}, dispatch)
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Form.create()(Agregar))
+export default (Form.create()(Agregar))

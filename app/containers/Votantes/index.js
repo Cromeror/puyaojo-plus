@@ -6,7 +6,7 @@ import {
     Row
 } from 'antd';
 /**Components */
-import Votantes from './Votantes'
+import All from './All'
 import Agregar from './Agregar'
 /* Helpers */
 import { pushPath } from 'helpers/helpers'
@@ -15,7 +15,8 @@ import { pathnames as utilPathnames } from '../../utils/keys'
 if (__DEVCLIENT__) {
     require('./style.scss')
 }
-
+/*Contantes */
+let paramsId = ''
 class Index extends React.Component {
     constructor(props) {
         super(props)
@@ -34,6 +35,7 @@ class Index extends React.Component {
 
     componentWillReceiveProps(nextProps, nextState) {
         if (this.props.location != nextProps.location) {
+            paramsId = nextProps.params.id
             this.renderChild(nextProps.location.pathname)
         }
     }
@@ -46,18 +48,26 @@ class Index extends React.Component {
     }
 
     renderChild = (pathname) => {
+        //Verificamos la ecistencia del Token para realizar peticiones desde los subComponentes
+        const token = this.props.user && this.props.user.token ? this.props.user.token : null
         switch (pathname) {
             case utilPathnames.PATH_VOTANTES_AGREGAR:
-                this.setState({ child: <Agregar /> })
+                this.setState({ child: <Agregar userToken={token} /> })
                 break;
-            case utilPathnames.PATH_VOTANTES_ACTUALIZAR:
-                this.setState({ child: <Agregar /> })
+            case utilPathnames.PATH_VOTANTES_ACTUALIZAR + '/' + paramsId:
+                this.setState({ child: <Agregar votanteId={paramsId} userToken={token} /> })
                 break
             default:
-                this.setState({ child: <Votantes /> })
+                this.setState({ child: <All /> })
                 break
         }
     }
 }
 
-export default (Index)
+function mapStateToProps(state) {
+    return {
+        user: state.user.data
+    }
+}
+
+export default connect(mapStateToProps)(Index)

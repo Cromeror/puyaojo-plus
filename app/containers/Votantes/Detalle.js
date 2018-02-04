@@ -11,9 +11,10 @@ import {
 } from 'antd'
 /* Actions */
 /*Services */
-import services from '../../services/votantes'
+import services from 'services/votantes'
 /*Helpers */
 import { pushPath } from 'helpers/helpers'
+import { pathnames as utilPathnames } from 'utils/keys'
 import { error } from 'util';
 /*Constants*/
 const
@@ -31,7 +32,9 @@ class BookingsManagement extends React.Component {
         return (
             <Card
                 actions={
-                    [<Icon type='edit' />,
+                    [<Link to={`${utilPathnames.PATH_VOTANTES_ACTUALIZAR}/${data ? data.id : ''}`}>
+                        <Icon type='edit' />
+                    </Link>,
                     <Icon type='delete' />]}>
                 <Row type="flex" justify="end">
                     <Icon type='close' onClick={this.onClose} />

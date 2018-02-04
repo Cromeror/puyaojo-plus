@@ -8,8 +8,8 @@ const service = {
     find: (token) => {
         return axios.get(`${apiUrl}/${recurso}`, { headers: { "Authorization": token } })
     },
-    get: id => {
-        return axios.get(`${apiUrl}/${recurso}/${id}`)
+    get: (id, token) => {
+        return axios.get(`${apiUrl}/${recurso}/${id}`, { headers: { "Authorization": token } })
     },
     add: (data, token) => {
         return axios.post(`${apiUrl}/${recurso}`, data, { headers: { "Authorization": token } })

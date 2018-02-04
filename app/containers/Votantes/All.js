@@ -83,7 +83,7 @@ const columns = [
         }
     }]
 
-class VerVotantes extends React.Component {
+class All extends React.Component {
     constructor(props) {
         super(props)
 
@@ -162,4 +162,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps)(VerVotantes)
+export default connect(mapStateToProps)(All)

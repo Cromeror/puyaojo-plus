@@ -57,13 +57,13 @@ const columns = [
         sorter: (a, b) => {
             return objectSorter(a, b, 'telefono')
         }
-    },
+    },/* 
     {
         title: 'Celular',
         dataIndex: 'celular',
         key: 'celular',
         width: 200
-    },
+    }, */
     {
         title: 'Dirección',
         dataIndex: 'direccion',
@@ -75,11 +75,11 @@ const columns = [
     },
     {
         title: 'Correo electrónico',
-        dataIndex: 'email',
-        key: 'email',
+        dataIndex: 'correo',
+        key: 'correo',
         width: 200,
         sorter: (a, b) => {
-            return objectSorter(a, b, 'email')
+            return objectSorter(a, b, 'correo')
         }
     }]
 

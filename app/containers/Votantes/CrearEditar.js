@@ -36,7 +36,7 @@ const RadioGroup = Radio.Group
 
 const updatePath = 'update/:id'
 let sending = false,
-    puestosEncontrados = []
+    puestosEncontrados = []//almacena los puestos encontrados cuando ingresamos informacion en el campo de puesto.
 
 /**
  * Importan en lo posible no usar componentWillReceiveProps genera un 
@@ -61,15 +61,25 @@ class Agregar extends React.Component {
             servicioVotantes.get(votanteId, userToken)
                 .then(votante => {
                     votante = votante.data
-                    //No me actualiza porque aun no esta registrado, tengo que encontrar el punto del ciclo de vida en conde el form esta registrado
-                    form.setFieldsValue(votante)
+                    form.setFieldsValue({
+                        cedula: votante.cedula,
+                        nombre: votante.nombre,
+                        apellido: votante.apellido,
+                        telefono: votante.telefono,
+                        direccion: votante.direccion,
+                        correo: votante.correo,
+                        mesa: votante.zonificacion.mesa,
+                        departamento: votante.zonificacion.puesto.departamento,
+                        municipio: votante.zonificacion.puesto.municipio,
+                        puesto: votante.zonificacion.puesto.puesto
+                    })
                 })
     }
 
     render() {
         const { getFieldDecorator } = this.props.form
         const { phone } = this.state
-
+        
         return (
             <Row >
                 <Form onSubmit={this.handleSave}>
@@ -197,16 +207,24 @@ class Agregar extends React.Component {
 
     handleSave = (e) => {
         e.preventDefault();
-        const { userToken, form } = this.props
+        const { userToken, votanteId, form } = this.props
         let data = form.getFieldsValue()
         data.zonificacion = {
             puestoId: data.puesto,
             mesa: data.mesa
         }
-        servicioVotantes.add(data, userToken)
-            .then(r => {
-                console.log(r.data)
-            })
+
+        if (votanteId && votanteId > 0)
+            servicioVotantes.update(data, votanteId, userToken)
+                .then(r => {
+                    console.log('UPDATE')
+                    console.log(r.data)
+                })
+        else
+            servicioVotantes.add(data, userToken)
+                .then(r => {
+                    console.log(r.data)
+                })
     }
 
     validationForm = (callback) => {

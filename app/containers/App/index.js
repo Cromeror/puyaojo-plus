@@ -35,13 +35,13 @@ class App extends React.Component {
     componentWillMount() {
         const { actions } = this.props
         let token = getToken()
-        /* Se obtiene el width y height del navegador */
-        if (typeof window === 'object') {
-            actions.initUIVars(window.innerWidth, window.innerHeight, window.innerWidth < 460)
-        }
         /* Si existe un token se carga y se inicia session */
         if (token) {
             actions.getUserInfo(token)
+        }
+        /* Se obtiene el width y height del navegador */
+        if (typeof window === 'object') {
+            actions.initUIVars(window.innerWidth, window.innerHeight, window.innerWidth < 460)
         }
     }
 

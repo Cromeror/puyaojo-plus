@@ -19,6 +19,7 @@ class Index extends React.Component {
 
     render() {
         return <AutoComplete
+            value={this.props.value}
             dataSource={this.dataSource}
             placeholder={this.props.placeholder}
             onChange={this.props.onChange}

@@ -14,9 +14,8 @@ const service = {
     add: (data, token) => {
         return axios.post(`${apiUrl}/${recurso}`, data, { headers: { "Authorization": token } })
     },
-    update: (data, id) => {
-        //data.source = serverConfig.appId
-        return axios.put(`${apiUrl}/${recurso}/${id}`, data)
+    update: (data, id, token) => {
+        return axios.put(`${apiUrl}/${recurso}/${id}`, data, { headers: { "Authorization": token } })
     }
 }
 

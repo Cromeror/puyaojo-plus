@@ -37,7 +37,11 @@ export default store => {
     }
 
     return (
-        <Route path="/" component={App} ignoreScrollBehavior>
+        <Route
+            path="/"
+            component={App}
+            onEnter={requireAuth}
+            ignoreScrollBehavior>
             <IndexRoute getComponent={(location, cb) => {
                 require.ensure([], require => {
                     cb(null, require('containers/Login').default)
@@ -45,8 +49,7 @@ export default store => {
             }} />,
            <Route
                 key="dashboard"
-                path="dashboard"/* 
-                onEnter={requireAuth} */
+                path="dashboard"
                 getComponent={(location, cb) => {
                     require.ensure([], require => {
                         cb(null, require('containers/Dashboard').default)
